@@ -1,7 +1,12 @@
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     private String firstName;
     private String lastName;
     private Address address;
+
+    public Person () {
+    }
 
     public Person (String firstName, String lastName, Address address) {
         this.firstName = firstName;

@@ -1,7 +1,12 @@
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
     private String city;
     private String street;
     private int houseNumber;
+
+    public Address() {
+    }
 
     public Address (String city, String street, int houseNumber) {
         this.city = city;

@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 
 public class Main {
@@ -21,5 +22,27 @@ public class Main {
 
         PersonIOUtil.writePersons("People.txt", people);
         PersonIOUtil.readPersons("People.txt");
+
+        try {
+            //Сериализация
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("PeopleAndAddress.bin"));
+            oos.writeObject(new Person("Ban", "Yang", address2));
+            oos.writeObject(person3);
+            oos.writeObject(new Person("Paul", "Stephens", address1));
+            oos.writeObject(personNull);
+            oos.flush();
+            oos.close();
+
+            //Десериализация
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("PeopleAndAddress.bin"));
+            while (ois != null) {
+                System.out.println("Person: " + (Person) ois.readObject() + " - Deserialization");
+            }
+            ois.close();
+        } catch (IOException e) {
+            System.out.println("The list is empty");
+        } catch (ClassNotFoundException e) {
+            System.out.println(e);
+        }
     }
 }
